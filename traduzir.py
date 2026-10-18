@@ -1,7 +1,8 @@
 import json
-import anthropic
+from google import genai
+from google.genai import types
 
-client= anthropic.Anthropic()
+client= genai.Client()
 
 def traduzir (textos):
     if not textos:
@@ -17,14 +18,16 @@ def traduzir (textos):
         f"{json.dumps(textos, ensure_ascii=False)}"
     )
 
-    resp = client.messages.create(
-        model="claude-sonnet-5-5",
-        max_tokens=2000,
-        messages=[{"role":"user", "content": prompt}],
-
+    resp = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            max_tokens=2000,
+            response_mime_type="application/json",
+        ),
     )
 
-    texto = resp.content[0].text.strip()
+    texto = resp.text.strip()
     texto=texto.replace("```json", "").replace("```","").strip()
     return json.loads(texto)
 
