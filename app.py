@@ -9,7 +9,7 @@ os.makedirs("uploads", exist_ok=True)
 HTML = """
 <h1>Tradutor de Mangá</h1>
 <form method="post" enctype="multipart/form-data">
-    <input type="file" name"pagina" accept="image/*" required>x
+    <input type="file" name="pagina" accept="image/*" required>
     <button type="submit">Traduzir</button>
 </form>
 """

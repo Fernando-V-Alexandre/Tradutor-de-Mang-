@@ -1,7 +1,8 @@
 import cv2
 
 def detectar_baloes(img):
-    gray=cv2.cvtColor(img,cv2.COLOR_BAYER_BG2GRAY)
+    # cv2.imread retorna uma imagem colorida BGR, não dados Bayer crus.
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     h, w =gray.shape
 
     # Pixels bem claros viram branco, o resto preto

@@ -2,7 +2,16 @@ import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-FONTE= "fonte.ttf"
+# O arquivo "fonte.ttf" não faz parte do projeto. Arial é fornecida pelo Windows
+# e contém os caracteres usados em português.
+FONTE = r"C:\Windows\Fonts\arial.ttf"
+
+
+def carregar_fonte(tamanho):
+    try:
+        return ImageFont.truetype(FONTE, tamanho)
+    except OSError:
+        return ImageFont.load_default()
 
 def apagar_balão(img, caixa, margem=8):
     x, y, w, h = caixa
@@ -34,7 +43,7 @@ def escrever_texo(pil_img, caixa, texto, margem=12):
     altura = h - 2 * margem
 
     for tamanho in range(40, 8, -1):
-        fonte = ImageFont.truetype (FONTE, tamanho)
+        fonte = carregar_fonte(tamanho)
         linhas= quebrar_linhas(draw, texto, fonte, largura)
         altura_linha = tamanho * 1.15
         if len (linhas) * altura_linha <= altura:

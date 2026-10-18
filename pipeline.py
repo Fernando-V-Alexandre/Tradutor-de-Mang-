@@ -24,7 +24,7 @@ def traduzir_pagina(caminho_entrada, caminho_saida):
     for b in baloes:
         apagar_balão(img, b)
 
-    pil = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BAYER_BGR2RGB))
+    pil = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     for b, texto in zip(baloes, traduzidos):
         escrever_texo(pil, b, texto)
 
